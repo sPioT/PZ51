@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class RequestCtrl {
 
 	@GET
 	@Path("/all/{userId}")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAll(@PathParam("userId") Long userId) {
 		List<Request> requestList = requestService.findAllByUser(userId);
 
@@ -36,7 +37,7 @@ public class RequestCtrl {
 
 	@GET
 	@Path("/{requestId}")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRequest(@PathParam("requestId") Long requestId) {
 		Request request = requestService.findOne(requestId);
 
@@ -45,8 +46,8 @@ public class RequestCtrl {
 
 	@POST
 	@Path("")
-	@Consumes("application/json")
-	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response saveRequest(@RequestBody RequestDTO dto) {
 		Request request = RequestDTO.dtoToRequest(dto);
 		request = requestService.save(request);
