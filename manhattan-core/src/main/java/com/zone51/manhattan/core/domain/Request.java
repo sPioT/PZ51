@@ -8,12 +8,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "requests")
-@NamedQuery(name = "Request.findAll", query = "SELECT r FROM Request r")
 public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -60,11 +59,11 @@ public class Request implements Serializable {
 	private int maxSkillGap;
 
 	// bi-directional many-to-one association to PotentialMatch
-	@OneToMany(mappedBy = "request1")
+	@OneToMany(mappedBy = "request1", fetch = FetchType.EAGER)
 	private List<PotentialMatch> potentialMatches1;
 
 	// bi-directional many-to-one association to PotentialMatch
-	@OneToMany(mappedBy = "request2")
+	@OneToMany(mappedBy = "request2", fetch = FetchType.EAGER)
 	private List<PotentialMatch> potentialMatches2;
 
 	// bi-directional many-to-one association to Sport
@@ -73,7 +72,7 @@ public class Request implements Serializable {
 	private Sport sport;
 
 	// bi-directional many-to-one association to User
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 

@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "potential_matches")
-@NamedQuery(name = "PotentialMatch.findAll", query = "SELECT p FROM PotentialMatch p")
 public class PotentialMatch implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,9 +28,9 @@ public class PotentialMatch implements Serializable {
 	@Column(nullable = false)
 	private int distance;
 
-	private byte reponse1;
+	private Boolean reponse1;
 
-	private byte reponse2;
+	private Boolean reponse2;
 
 	// bi-directional many-to-one association to Request
 	@ManyToOne
@@ -63,19 +61,19 @@ public class PotentialMatch implements Serializable {
 		this.distance = distance;
 	}
 
-	public byte getReponse1() {
+	public Boolean getReponse1() {
 		return this.reponse1;
 	}
 
-	public void setReponse1(byte reponse1) {
+	public void setReponse1(Boolean reponse1) {
 		this.reponse1 = reponse1;
 	}
 
-	public byte getReponse2() {
+	public Boolean getReponse2() {
 		return this.reponse2;
 	}
 
-	public void setReponse2(byte reponse2) {
+	public void setReponse2(Boolean reponse2) {
 		this.reponse2 = reponse2;
 	}
 

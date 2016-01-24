@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sports")
-@NamedQuery(name = "Sport.findAll", query = "SELECT s FROM Sport s")
 public class Sport implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +39,12 @@ public class User implements Serializable {
 	private List<Request> requests;
 
 	public User() {
+		super();
+	}
+
+	public User(Long userId) {
+		super();
+		id = userId;
 	}
 
 	public Long getId() {
