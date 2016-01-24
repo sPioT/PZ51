@@ -40,6 +40,10 @@ public class RequestDTO {
 		user = UserDTO.userToDTO(request.getUser());
 	}
 
+	public RequestDTO() {
+		super();
+	}
+
 	/**
 	 * @return the id
 	 */

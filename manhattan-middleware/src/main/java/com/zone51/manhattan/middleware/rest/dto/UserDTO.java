@@ -9,6 +9,10 @@ public class UserDTO {
 	private String lastname;
 	private String nickname;
 
+	public UserDTO() {
+		super();
+	}
+
 	/**
 	 * @return the id
 	 */

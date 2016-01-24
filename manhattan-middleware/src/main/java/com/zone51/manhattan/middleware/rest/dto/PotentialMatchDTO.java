@@ -24,6 +24,10 @@ public class PotentialMatchDTO {
 		request2 = RequestDTO.requestToDTO(match.getRequest2(), false);
 	}
 
+	public PotentialMatchDTO() {
+		super();
+	}
+
 	/**
 	 * @return the id
 	 */

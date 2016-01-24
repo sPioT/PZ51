@@ -33,8 +33,9 @@ public class RequestService implements IRequestService {
 	@Override
 	public Request save(Request request) {
 
-		return requestRepository.saveAndFlush(request);
+		Request newReq = requestRepository.saveAndFlush(request);
 
+		return findOne(newReq.getId());
 	}
 
 }

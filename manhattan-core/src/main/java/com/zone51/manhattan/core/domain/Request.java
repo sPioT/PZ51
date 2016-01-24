@@ -29,7 +29,7 @@ public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
 
@@ -153,9 +153,12 @@ public class Request implements Serializable {
 
 	public List<PotentialMatch> getPotentialMatches() {
 		List<PotentialMatch> po = new ArrayList<PotentialMatch>();
-		po.addAll(this.potentialMatches1);
-		po.addAll(this.potentialMatches2);
-
+		if (this.potentialMatches1 != null) {
+			po.addAll(this.potentialMatches1);
+		}
+		if (this.potentialMatches2 != null) {
+			po.addAll(this.potentialMatches2);
+		}
 		return po;
 	}
 
