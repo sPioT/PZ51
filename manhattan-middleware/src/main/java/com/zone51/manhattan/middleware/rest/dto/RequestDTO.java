@@ -35,7 +35,7 @@ public class RequestDTO {
 		maxDistance = request.getMaxDistance();
 		maxSkillGap = request.getMaxSkillGap();
 		if (deep) {
-			potentialMatches = PotentialMatchDTO.PotentialMatchesToDTO(request.getPotentialMatches());
+			potentialMatches = PotentialMatchDTO.PotentialMatchesToDTO(request.getPotentialMatches(),request);
 		}
 		user = UserDTO.userToDTO(request.getUser());
 	}
