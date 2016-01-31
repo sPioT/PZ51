@@ -25,8 +25,12 @@ public class RequestCtrl {
 	private IRequestService requestService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/all/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<RequestDTO> getAll(@PathVariable Long userId) {
+	public @ResponseBody List<RequestDTO> getAll(@PathVariable Long userId, HttpServletResponse response) {
 		List<Request> requestList = requestService.findAllByUser(userId);
+
+		if (requestList == null || requestList.isEmpty()) {
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		}
 
 		return RequestDTO.requestsToDTO(requestList);
 	}
