@@ -1,19 +1,16 @@
 package com.zone51.manhattan.middleware.rest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.springframework.stereotype.Component;
-
-@Component
-@Path("")
+@Controller
+@RequestMapping("")
 public class App {
 
-	@GET
-	@Path("")
-	public Response index() {
-		String welcome = "Welcome to manhattan Middleware REST";
-		return Response.status(200).entity(welcome).build();
+	@RequestMapping(method = RequestMethod.GET)
+	public @ResponseBody String index() {
+		return "Welcome to manhattan Middleware REST";
 	}
 }

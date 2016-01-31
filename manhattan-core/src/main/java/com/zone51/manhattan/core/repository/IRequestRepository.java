@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.zone51.manhattan.core.domain.Request;
 
@@ -15,6 +16,7 @@ import com.zone51.manhattan.core.domain.Request;
  * @author piot
  *
  */
+@Repository
 public interface IRequestRepository extends JpaRepository<Request, Long> {
 
 	@Query("select r from Request r where r.user.id = :userId")

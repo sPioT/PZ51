@@ -79,10 +79,7 @@
     </bean>
         
    	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
-   	
-   	<!-- Rest Template use to authentication -->
-   	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
-   	
+   	   	
    	<!-- Services -->
    		
 	<!-- Placeholder configuration -->

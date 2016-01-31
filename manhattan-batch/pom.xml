@@ -11,7 +11,7 @@
 
 	<properties>
 		<!-- Frameworks version -->
-		<spring.version>4.0.5.RELEASE</spring.version>
+		<spring.version>4.2.4.RELEASE</spring.version>
 		<spring.batch.version>3.0.0.RELEASE</spring.batch.version>
 		<hsqldb.version>1.8.0.7</hsqldb.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -56,6 +56,13 @@
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-test</artifactId>
 			<version>${spring.batch.version}</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 
 		<!-- Commons -->

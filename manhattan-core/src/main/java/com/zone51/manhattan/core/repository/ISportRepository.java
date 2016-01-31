@@ -4,6 +4,7 @@
 package com.zone51.manhattan.core.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.zone51.manhattan.core.domain.Sport;
 
@@ -11,6 +12,7 @@ import com.zone51.manhattan.core.domain.Sport;
  * @author piot
  *
  */
+@Repository
 public interface ISportRepository extends JpaRepository<Sport, Long> {
 
 }
