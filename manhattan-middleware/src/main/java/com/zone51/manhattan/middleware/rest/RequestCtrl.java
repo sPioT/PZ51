@@ -2,6 +2,8 @@ package com.zone51.manhattan.middleware.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,16 +32,27 @@ public class RequestCtrl {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{requestId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody RequestDTO getRequest(@PathVariable Long requestId) {
+	@ResponseBody
+	public RequestDTO getRequest(@PathVariable Long requestId, HttpServletResponse response) {
 		Request request = requestService.findOne(requestId);
+
+		if (request == null) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 
 		return RequestDTO.requestToDTO(request, true);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody RequestDTO saveRequest(@RequestBody RequestDTO dto) {
+	@ResponseBody
+	public RequestDTO saveRequest(@RequestBody RequestDTO dto, HttpServletResponse response) {
 		Request request = RequestDTO.dtoToRequest(dto);
-		request = requestService.save(request);
+		try {
+			request = requestService.save(request);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
 
 		return RequestDTO.requestToDTO(request, true);
 	}

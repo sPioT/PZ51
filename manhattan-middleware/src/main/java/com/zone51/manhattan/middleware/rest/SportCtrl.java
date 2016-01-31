@@ -2,6 +2,8 @@ package com.zone51.manhattan.middleware.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +24,23 @@ public class SportCtrl {
 	private ISportService sportService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<SportDTO> getAll() {
+	public @ResponseBody List<SportDTO> getAll(HttpServletResponse response) {
 		List<Sport> sportList = sportService.findAll();
+
+		if (sportList == null || sportList.isEmpty()) {
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		}
 
 		return SportDTO.sportsToDTO(sportList);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{sportId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody SportDTO getSport(@PathVariable Long sportId) {
+	public @ResponseBody SportDTO getSport(@PathVariable Long sportId, HttpServletResponse response) {
 		Sport sport = sportService.findOne(sportId);
+
+		if (sport == null) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 
 		return SportDTO.sportToDTO(sport);
 	}
