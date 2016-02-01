@@ -1,7 +1,6 @@
 package com.zone51.manhattan.core.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,10 +46,10 @@ public class Request implements Serializable {
 	private short dateRange;
 
 	@Column(nullable = false, precision = 10, scale = 6)
-	private BigDecimal latitude;
+	private Double latitude;
 
 	@Column(nullable = false, precision = 10, scale = 6)
-	private BigDecimal longitude;
+	private Double longitude;
 
 	@Column(name = "max_distance", nullable = false)
 	private int maxDistance;
@@ -119,19 +118,19 @@ public class Request implements Serializable {
 		this.dateRange = dateRange;
 	}
 
-	public BigDecimal getLatitude() {
+	public Double getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public BigDecimal getLongitude() {
+	public Double getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 

@@ -1,6 +1,7 @@
 package com.zone51.manhattan.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the sports database table.
@@ -22,15 +25,17 @@ public class Sport implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(length = 100)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at")
+	private Date createdAt;
+
 	private String sportname;
 
-	// bi-directional many-to-one association to Request
+	// bi-directional many-to-one association to UsersSport
 	@OneToMany(mappedBy = "sport")
-	private List<Request> requests;
+	private List<UsersSport> usersSports;
 
 	public Sport() {
 	}
@@ -43,6 +48,14 @@ public class Sport implements Serializable {
 		this.id = id;
 	}
 
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public String getSportname() {
 		return this.sportname;
 	}
@@ -51,26 +64,26 @@ public class Sport implements Serializable {
 		this.sportname = sportname;
 	}
 
-	public List<Request> getRequests() {
-		return this.requests;
+	public List<UsersSport> getUsersSports() {
+		return this.usersSports;
 	}
 
-	public void setRequests(List<Request> requests) {
-		this.requests = requests;
+	public void setUsersSports(List<UsersSport> usersSports) {
+		this.usersSports = usersSports;
 	}
 
-	public Request addRequest(Request request) {
-		getRequests().add(request);
-		request.setSport(this);
+	public UsersSport addUsersSport(UsersSport usersSport) {
+		getUsersSports().add(usersSport);
+		usersSport.setSport(this);
 
-		return request;
+		return usersSport;
 	}
 
-	public Request removeRequest(Request request) {
-		getRequests().remove(request);
-		request.setSport(null);
+	public UsersSport removeUsersSport(UsersSport usersSport) {
+		getUsersSports().remove(usersSport);
+		usersSport.setSport(null);
 
-		return request;
+		return usersSport;
 	}
 
 }

@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.apache.commons.lang.BooleanUtils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zone51.manhattan.core.domain.PotentialMatch;
 import com.zone51.manhattan.core.domain.Request;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PotentialMatchDTO {
 
 	private Long id;

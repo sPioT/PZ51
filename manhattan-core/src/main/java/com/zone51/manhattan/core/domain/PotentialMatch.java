@@ -1,6 +1,7 @@
 package com.zone51.manhattan.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the potential_matches database table.
@@ -25,8 +28,12 @@ public class PotentialMatch implements Serializable {
 	@Column(unique = true, nullable = false)
 	private Long id;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at")
+	private Date createdAt;
+
 	@Column(nullable = false)
-	private int distance;
+	private Integer distance;
 
 	private Boolean reponse1;
 
@@ -91,6 +98,14 @@ public class PotentialMatch implements Serializable {
 
 	public void setRequest2(Request request2) {
 		this.request2 = request2;
+	}
+
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }

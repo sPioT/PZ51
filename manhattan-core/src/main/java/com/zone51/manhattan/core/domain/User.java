@@ -1,6 +1,7 @@
 package com.zone51.manhattan.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the users database table.
@@ -22,29 +25,36 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(length = 100)
+	@Temporal(TemporalType.DATE)
+	private Date birthday;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at")
+	private Date createdAt;
+
 	private String firstname;
 
-	@Column(length = 100)
+	private Character gender;
+
 	private String lastname;
 
-	@Column(length = 100)
 	private String nickname;
 
-	// bi-directional many-to-one association to Request
+	// bi-directional many-to-one association to UsersLocation
 	@OneToMany(mappedBy = "user")
-	private List<Request> requests;
+	private List<UsersLocation> usersLocations;
+
+	// bi-directional many-to-one association to UsersSport
+	@OneToMany(mappedBy = "user")
+	private List<UsersSport> usersSports;
 
 	public User() {
-		super();
 	}
 
-	public User(Long userId) {
-		super();
-		id = userId;
+	public User(Long id) {
+		this.id = id;
 	}
 
 	public Long getId() {
@@ -55,12 +65,36 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
+	public Date getBirthday() {
+		return this.birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public String getFirstname() {
 		return this.firstname;
 	}
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
+	}
+
+	public Character getGender() {
+		return this.gender;
+	}
+
+	public void setGender(Character gender) {
+		this.gender = gender;
 	}
 
 	public String getLastname() {
@@ -79,26 +113,48 @@ public class User implements Serializable {
 		this.nickname = nickname;
 	}
 
-	public List<Request> getRequests() {
-		return this.requests;
+	public List<UsersLocation> getUsersLocations() {
+		return this.usersLocations;
 	}
 
-	public void setRequests(List<Request> requests) {
-		this.requests = requests;
+	public void setUsersLocations(List<UsersLocation> usersLocations) {
+		this.usersLocations = usersLocations;
 	}
 
-	public Request addRequest(Request request) {
-		getRequests().add(request);
-		request.setUser(this);
+	public UsersLocation addUsersLocation(UsersLocation usersLocation) {
+		getUsersLocations().add(usersLocation);
+		usersLocation.setUser(this);
 
-		return request;
+		return usersLocation;
 	}
 
-	public Request removeRequest(Request request) {
-		getRequests().remove(request);
-		request.setUser(null);
+	public UsersLocation removeUsersLocation(UsersLocation usersLocation) {
+		getUsersLocations().remove(usersLocation);
+		usersLocation.setUser(null);
 
-		return request;
+		return usersLocation;
+	}
+
+	public List<UsersSport> getUsersSports() {
+		return this.usersSports;
+	}
+
+	public void setUsersSports(List<UsersSport> usersSports) {
+		this.usersSports = usersSports;
+	}
+
+	public UsersSport addUsersSport(UsersSport usersSport) {
+		getUsersSports().add(usersSport);
+		usersSport.setUser(this);
+
+		return usersSport;
+	}
+
+	public UsersSport removeUsersSport(UsersSport usersSport) {
+		getUsersSports().remove(usersSport);
+		usersSport.setUser(null);
+
+		return usersSport;
 	}
 
 }

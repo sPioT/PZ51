@@ -1,13 +1,14 @@
 package com.zone51.manhattan.middleware.rest.dto;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zone51.manhattan.core.domain.Request;
 import com.zone51.manhattan.core.domain.User;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RequestDTO {
 
 	private Long id;
@@ -15,8 +16,8 @@ public class RequestDTO {
 	private int skill;
 	private Date date;
 	private short dateRange;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
+	private Double latitude;
+	private Double longitude;
 	private int maxDistance;
 	private int maxSkillGap;
 	private List<PotentialMatchDTO> potentialMatches;
@@ -35,9 +36,9 @@ public class RequestDTO {
 		maxDistance = request.getMaxDistance();
 		maxSkillGap = request.getMaxSkillGap();
 		if (deep) {
-			potentialMatches = PotentialMatchDTO.PotentialMatchesToDTO(request.getPotentialMatches(),request);
+			potentialMatches = PotentialMatchDTO.PotentialMatchesToDTO(request.getPotentialMatches(), request);
 		}
-		user = UserDTO.userToDTO(request.getUser());
+		user = UserDTO.userToDTO(request.getUser(), true);
 	}
 
 	public RequestDTO() {
@@ -122,7 +123,7 @@ public class RequestDTO {
 	/**
 	 * @return the latitude
 	 */
-	public BigDecimal getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
@@ -130,14 +131,14 @@ public class RequestDTO {
 	 * @param latitude
 	 *            the latitude to set
 	 */
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	/**
 	 * @return the longitude
 	 */
-	public BigDecimal getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
@@ -145,7 +146,7 @@ public class RequestDTO {
 	 * @param longitude
 	 *            the longitude to set
 	 */
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
