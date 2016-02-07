@@ -34,6 +34,8 @@ public class User implements Serializable {
 	@Column(name = "created_at")
 	private Date createdAt;
 
+	private String email;
+
 	private String firstname;
 
 	private Character gender;
@@ -42,6 +44,8 @@ public class User implements Serializable {
 
 	private String nickname;
 
+	private String password;
+
 	// bi-directional many-to-one association to UsersLocation
 	@OneToMany(mappedBy = "user")
 	private List<UsersLocation> usersLocations;
@@ -49,6 +53,10 @@ public class User implements Serializable {
 	// bi-directional many-to-one association to UsersSport
 	@OneToMany(mappedBy = "user")
 	private List<UsersSport> usersSports;
+
+	// bi-directional many-to-one association to OauthUser
+	@OneToMany(mappedBy = "user")
+	private List<OauthUser> oauthUsers;
 
 	public User() {
 	}
@@ -81,6 +89,14 @@ public class User implements Serializable {
 		this.createdAt = createdAt;
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getFirstname() {
 		return this.firstname;
 	}
@@ -111,6 +127,14 @@ public class User implements Serializable {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<UsersLocation> getUsersLocations() {
@@ -155,6 +179,28 @@ public class User implements Serializable {
 		usersSport.setUser(null);
 
 		return usersSport;
+	}
+
+	public List<OauthUser> getOauthUsers() {
+		return this.oauthUsers;
+	}
+
+	public void setOauthUsers(List<OauthUser> oauthUsers) {
+		this.oauthUsers = oauthUsers;
+	}
+
+	public OauthUser addOauthUser(OauthUser oauthUser) {
+		getOauthUsers().add(oauthUser);
+		oauthUser.setUser(this);
+
+		return oauthUser;
+	}
+
+	public OauthUser removeOauthUser(OauthUser oauthUser) {
+		getOauthUsers().remove(oauthUser);
+		oauthUser.setUser(null);
+
+		return oauthUser;
 	}
 
 }
